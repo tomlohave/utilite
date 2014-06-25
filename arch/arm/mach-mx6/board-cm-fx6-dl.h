@@ -144,8 +144,8 @@ static iomux_v3_cfg_t cm_fx6_dl_pads[] = {
 	MX6DL_PAD_DISP0_DAT23__IPU1_DISP0_DAT_23,
 
 	/* UART2 */
-	MX6DL_PAD_EIM_D26__UART2_RXD,
-	MX6DL_PAD_EIM_D27__UART2_TXD,
+        MX6DL_PAD_GPIO_7__UART2_TXD,
+        MX6DL_PAD_GPIO_8__UART2_RXD,
 
 	/* PWM1 */
 	MX6DL_PAD_GPIO_9__PWM1_PWMO,
@@ -171,10 +171,25 @@ static iomux_v3_cfg_t cm_fx6_dl_pads[] = {
 	/* SPDIF */
 	MX6DL_PAD_GPIO_16__SPDIF_IN1,
 	MX6DL_PAD_GPIO_19__SPDIF_OUT1,
+
+	/* ipu1 csi0 */
+	MX6DL_PAD_CSI0_DAT10__IPU1_CSI0_D_10,
+	MX6DL_PAD_CSI0_DAT11__IPU1_CSI0_D_11,
+	MX6DL_PAD_CSI0_DAT12__IPU1_CSI0_D_12,
+	MX6DL_PAD_CSI0_DAT13__IPU1_CSI0_D_13,
+	MX6DL_PAD_CSI0_DAT14__IPU1_CSI0_D_14,
+	MX6DL_PAD_CSI0_DAT15__IPU1_CSI0_D_15,
+	MX6DL_PAD_CSI0_DAT16__IPU1_CSI0_D_16,
+	MX6DL_PAD_CSI0_DAT17__IPU1_CSI0_D_17,
+	MX6DL_PAD_CSI0_DAT18__IPU1_CSI0_D_18,
+	MX6DL_PAD_CSI0_DAT19__IPU1_CSI0_D_19,
+	MX6DL_PAD_CSI0_VSYNC__IPU1_CSI0_VSYNC,
+	MX6DL_PAD_CSI0_MCLK__IPU1_CSI0_HSYNC,
+	MX6DL_PAD_CSI0_PIXCLK__IPU1_CSI0_PIXCLK,
 };
 
-#define CM_FX6_DL_USDHC_PAD_SETTING(id, speed)	\
-cm_fx6_dl_sd##id##_##speed##mhz[] = {		\
+#define CM_FX6_DL_USDHC_PAD_SETTING_FULL(id, speed)		\
+static iomux_v3_cfg_t cm_fx6_dl_sd##id##_full_##speed##mhz[] = {	\
 	MX6DL_PAD_SD##id##_CLK__USDHC##id##_CLK_##speed##MHZ,	\
 	MX6DL_PAD_SD##id##_CMD__USDHC##id##_CMD_##speed##MHZ,	\
 	MX6DL_PAD_SD##id##_DAT0__USDHC##id##_DAT0_##speed##MHZ,	\
@@ -187,8 +202,8 @@ cm_fx6_dl_sd##id##_##speed##mhz[] = {		\
 	MX6DL_PAD_SD##id##_DAT7__USDHC##id##_DAT7_##speed##MHZ,	\
 }
 
-#define CM_FX6_DL_USDHC_PAD_SETTING_HALF(id, speed)	\
-cm_fx6_dl_sd##id##_##speed##mhz[] = {		\
+#define CM_FX6_DL_USDHC_PAD_SETTING_HALF(id, speed)		\
+static iomux_v3_cfg_t cm_fx6_dl_sd##id##_half_##speed##mhz[] = {\
 	MX6DL_PAD_SD##id##_CLK__USDHC##id##_CLK_##speed##MHZ,	\
 	MX6DL_PAD_SD##id##_CMD__USDHC##id##_CMD_##speed##MHZ,	\
 	MX6DL_PAD_SD##id##_DAT0__USDHC##id##_DAT0_##speed##MHZ,	\
@@ -197,13 +212,9 @@ cm_fx6_dl_sd##id##_##speed##mhz[] = {		\
 	MX6DL_PAD_SD##id##_DAT3__USDHC##id##_DAT3_##speed##MHZ,	\
 }
 
-static iomux_v3_cfg_t CM_FX6_DL_USDHC_PAD_SETTING(3, 50);
-static iomux_v3_cfg_t CM_FX6_DL_USDHC_PAD_SETTING(3, 100);
-static iomux_v3_cfg_t CM_FX6_DL_USDHC_PAD_SETTING(3, 200);
-
-static iomux_v3_cfg_t CM_FX6_DL_USDHC_PAD_SETTING_HALF(1, 50);
-static iomux_v3_cfg_t CM_FX6_DL_USDHC_PAD_SETTING_HALF(1, 100);
-static iomux_v3_cfg_t CM_FX6_DL_USDHC_PAD_SETTING_HALF(1, 200);
+CM_FX6_DL_USDHC_PAD_SETTING_FULL(3, 200);
+CM_FX6_DL_USDHC_PAD_SETTING_HALF(3, 200);
+CM_FX6_DL_USDHC_PAD_SETTING_HALF(1, 200);
 
 #if defined(CONFIG_MTD_NAND_GPMI_NAND)
 static iomux_v3_cfg_t cm_fx6_dl_gpmi_nand[] = {
